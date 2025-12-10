@@ -1,0 +1,12 @@
+html {
+  background-color: var(--bg-main);
+}
+
+html .container {
+  justify-content: flex-start;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: $s-4;
+  padding: 20px;
+}

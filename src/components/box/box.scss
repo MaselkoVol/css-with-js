@@ -1,0 +1,12 @@
+.box {
+  background-color: var(--color-light);
+  padding: $s-2;
+  max-width: 400px;
+
+  &__title {
+    color: var(--color-text);
+  }
+  &__text {
+    color: var(--color-text-muted);
+  }
+}
