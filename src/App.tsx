@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import "./App.scss";
 import Button from "./components/ui/button/button";
 import ThemeContext from "./contexts/theme/theme-context";
