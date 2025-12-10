@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+# CSS with JS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The idea is to provide the JavaScript environment with full context of our css design tokens.
 
-Currently, two official plugins are available:
+### 1. Single Source of Truth
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+By defining design tokens directly in TypeScript, we achieve two goals:
 
-## Expanding the ESLint configuration
+- **Type Safety:** We get fully typed variables for use within the JS/TS environment.
+- **Dynamic Generation:** We automatically generate CSS and SCSS variables from these tokens for use in stylesheets.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 2. SCSS vs. CSS Custom Properties
 
-- Configure the top-level `parserOptions` property like this:
+For static styles, I prioritize SCSS variables over native CSS variables (`var(--...)`). SCSS variables are compiled at build time, offering better efficiency and a more convenient syntax.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Comparison: SCSS
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+```scss
+/* ❌ Native CSS Variables (Verbose) */
+.element {
+  border: var(--bw-sm) solid var(--color-primary);
+  font-size: var(--fz-sm);
+}
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+/* ✅ SCSS Variables (Preferred) */
+.element {
+  border: $bw-sm solid var(--color-primary);
+  font-size: $fz-sm;
+}
 ```
